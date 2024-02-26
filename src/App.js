@@ -15,7 +15,7 @@ function App() {
     const getGegevens = async () => {
       try {
         const data = await getDocs(gegevensCollectionRef);
-        const filteredData = data.docs.map((doc) => ({...doc.data(), id: doc.id,}))
+        const filteredData = data.docs.map((doc) => ({ ...doc.data(), id: doc.id, }))
         setGegevens(filteredData)
       } catch (err) {
         console.error(err);
