@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { db } from "../config/firebase";
+// import { db } from "../config/firebase";
+import moment from "moment";
 import { getFirestore, collection, addDoc } from "firebase/firestore";
 
 export const Form = () => {
@@ -11,6 +12,7 @@ export const Form = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const db = getFirestore(); // Access Firestore instance
+    const timestamp = moment().format();
 
     try {
       await addDoc(collection(db, "gegevens"), {
@@ -18,8 +20,13 @@ export const Form = () => {
         lname,
         age,
         city,
+        timestamp,
       });
       alert("het is gelukt, dankjewel");
+      setfname("");
+      setlname("");
+      setage("");
+      setcity("");
     } catch (error) {
       alert(error.message);
     }
@@ -32,10 +39,10 @@ export const Form = () => {
 
     return (
         <form onSubmit={handleSubmit}>
-            <input placeholder="Voornaam..." value={fname} onChange={(e) => setfname(e.target.value)} />
-            <input placeholder="Achternaam..." value={lname} onChange={(e) => setlname(e.target.value)} />
-            <input placeholder="Leeftijd..." value={age} onChange={(e) => setage(e.target.value)} />
-            <input placeholder="Stad..." value={city} onChange={(e) => setcity(e.target.value)} />
+            <input required placeholder="Voornaam..." value={fname} onChange={(e) => setfname(e.target.value)} />
+            <input required placeholder="Achternaam..." value={lname} onChange={(e) => setlname(e.target.value)} />
+            <input required placeholder="Leeftijd..." value={age} onChange={(e) => setage(e.target.value)} />
+            <input required placeholder="Stad..." value={city} onChange={(e) => setcity(e.target.value)} />
             <button type="submit">Submit</button>
         </form>
     );
