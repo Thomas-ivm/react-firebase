@@ -9,27 +9,27 @@ export const Form = () => {
     const [age, setage] = useState("");
     const [city, setcity] = useState("");
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const db = getFirestore(); // Access Firestore instance
-    const timestamp = moment().format();
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const db = getFirestore(); // Access Firestore instance
+        const timestamp = moment().format();
 
-    try {
-      await addDoc(collection(db, "gegevens"), {
-        fname,
-        lname,
-        age,
-        city,
-        timestamp,
-      });
-      alert("het is gelukt, dankjewel");
-      setfname("");
-      setlname("");
-      setage("");
-      setcity("");
-    } catch (error) {
-      alert(error.message);
-    }
+        try {
+            await addDoc(collection(db, "gegevens"), {
+                fname,
+                lname,
+                age,
+                city,
+                timestamp,
+            });
+            alert("het is gelukt, dankjewel");
+            setfname("");
+            setlname("");
+            setage("");
+            setcity("");
+        } catch (error) {
+            alert(error.message);
+        }
 
         setfname();
         setlname();
