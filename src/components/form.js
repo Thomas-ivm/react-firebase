@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { db } from "../config/firebase";
-
+import { getFirestore, collection, addDoc } from "firebase/firestore";
 
 export const Form = () => {
     const [fname, setfname] = useState("");
@@ -8,22 +8,26 @@ export const Form = () => {
     const [age, setage] = useState("");
     const [city, setcity] = useState("");
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const db = getFirestore(); // Access Firestore instance
 
-        db.collection('gegevens').add({
-            fname:fname,
-            lmane:lname,
-            age:age,
-            city:city,
-        })
-        .then(() => {
-            //still in progress
-            alert('het is gelukt 👍, dankjewel')
-        })
-        .catch((error) => {
-            alert(error.message);
-        })
+    try {
+      await addDoc(collection(db, "gegevens"), {
+        fname,
+        lname,
+        age,
+        city,
+      });
+      alert("het is gelukt, dankjewel");
+    } catch (error) {
+      alert(error.message);
+    }
+
+        setfname();
+        setlname();
+        setage();
+        setcity();
     };
 
     return (
@@ -34,5 +38,5 @@ export const Form = () => {
             <input placeholder="Stad..." value={city} onChange={(e) => setcity(e.target.value)} />
             <button type="submit">Submit</button>
         </form>
-    )
-}
+    );
+};
