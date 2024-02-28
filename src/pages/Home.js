@@ -5,8 +5,6 @@ import { Auth } from '../components/auth';
 import { db } from '../config/firebase';
 import { getDocs, collection } from 'firebase/firestore';
 import { Form } from '../components/form';
-import { BrowserRouter, Route, Routes, Link } from 'react-router-dom';
-import { Detail } from '../pages/detail';
 
 function Home() {
     const [gegevens, setGegevens] = useState([]);
@@ -42,16 +40,8 @@ function Home() {
             Learn React
           </a>
           <div>
-  
-  
             <Auth />
-            <Form />
-            {/* <BrowserRouter>
-              <Routes>
-                <Route path='/detail' element={<Detail />}></Route>
-              </Routes>
-            </BrowserRouter> */}
-  
+            <Form />  
             <div>
               {gegevens.map((gegevens) => (
                 <div>
