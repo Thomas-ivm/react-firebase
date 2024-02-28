@@ -20,10 +20,10 @@ function Home() {
           console.error(err);
         }
       };
-  
+
       getGegevens();
     }, [])
-  
+
     return (
       <div className="App">
         <header className="App-header">
