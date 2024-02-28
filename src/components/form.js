@@ -1,7 +1,7 @@
 import { useState } from "react";
-// import { db } from "../config/firebase";
 import moment from "moment";
 import { getFirestore, collection, addDoc } from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
 
 export const Form = () => {
     const [fname, setfname] = useState("");
@@ -9,11 +9,12 @@ export const Form = () => {
     const [age, setage] = useState("");
     const [city, setcity] = useState("");
 
+    const navigate = useNavigate();
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         const db = getFirestore(); // Access Firestore instance
         const timestamp = moment().format();
-
         try {
             await addDoc(collection(db, "gegevens"), {
                 fname,
@@ -22,7 +23,8 @@ export const Form = () => {
                 city,
                 timestamp,
             });
-            alert("het is gelukt, dankjewel");
+            // alert("het is gelukt, dankjewel");
+            navigate('./detail');
             setfname("");
             setlname("");
             setage("");
