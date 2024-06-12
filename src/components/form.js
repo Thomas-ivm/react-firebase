@@ -23,7 +23,6 @@ export const Form = () => {
                 city,
                 timestamp,
             });
-            // alert("het is gelukt, dankjewel");
             navigate('./detail');
             setfname("");
             setlname("");
